@@ -26,13 +26,42 @@ const customIcon = {
     strokeWeight: 3
 };
 
-function addMarker(marker) {
+function addMarker(place) {
     var marker = new google.maps.Marker({
         map: map,
-        position: new google.maps.LatLng(marker.lat, marker.lng),
+        position: new google.maps.LatLng(place.lat, place.lng),
         icon: customIcon,
-        title: marker.name
+        title: place.name
     });
+    
+    var infowindow = new google.maps.InfoWindow({
+            content: place.name
+        });
+    
+    marker.addListener('click', function() {
+        this.setMap(null);
+        this.icon.fillColor = '#FFFFFF';
+        this.setMap(map);
+
+        infowindow.open(map, this);
+        
+        var actualMarker = this;
+        infowindow.addListener('closeclick', function(){
+                actualMarker.setMap(null);
+                actualMarker.icon.fillColor = '#F7B217';
+                actualMarker.setMap(map);
+            });
+        
+        console.log(this.icon);
+    });
+
+}
+
+// add all markers
+function addAllMarkers(places) {
+    for (var i=0 ; i < places.length ; i++) {
+        addMarker(places[i]);
+    }
 }
 
 function initMap() {
@@ -55,6 +84,7 @@ function initMap() {
 
     map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
-    //Adicionando o primeiro marcador como exemplo
-    addMarker(placesOfInterest[0]);
+    addAllMarkers(placesOfInterest);    
+    
+    
 }
