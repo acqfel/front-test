@@ -50,37 +50,21 @@ function createInfoWindow(marker, infowindow, content){
           infowindow.marker = marker;
           infowindow.setContent(content);
           
-          changeFillColor(marker);
+          changeFillColor(marker, '#FFFFFF');
           infowindow.open(map, marker);
           
-          var actualMarker = this;
+          var actualMarker = marker;
           // Make sure the marker property is cleared if the infowindow is closed.
           infowindow.addListener('closeclick',function(){
-            changeFillColor(actualMarker);
+            changeFillColor(actualMarker, '#F7B217');
             infowindow.setMarker = null;
           });
         }
-    
-    //changeFillColor(this);
-    //
-    //infowindow.open(map, this);
-    //
-    //var actualMarker = this;
-    //infowindow.addListener('closeclick', function(){
-    //        changeFillColor(actualMarker);
-    //    });
 }
 
-function changeFillColor(marker){
+function changeFillColor(marker, color){
     marker.setMap(null);
-    var color = marker.icon.fillColor;
     
-    if(color === '#FFFFFF') {
-        color = '#F7B217';
-    }
-    else if (color === '#F7B217'){
-        color = '#FFFFFF';
-    }
     marker.icon.fillColor = color;
     marker.setMap(map);
 }
