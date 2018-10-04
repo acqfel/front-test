@@ -1,8 +1,9 @@
 console.log('Yet another Hello world');
 
 var map = null;
+var myInfoWindow;
 
-placesOfInterest = [
+var placesOfInterest = [
     { name: 'Charme da paulista', lat: -23.562172, lng: -46.655794 },
     { name: 'The Blue Pub', lat: -23.563112, lng: -46.650338 },
     { name: 'Veloso', lat: -23.585107, lng: -46.635219 },
@@ -34,23 +35,40 @@ function addMarker(place) {
         title: place.name
     });
     
-    var infowindow = new google.maps.InfoWindow({
-            content: place.name
-        });
+    var content = place.name;
     
     marker.addListener('click', function() {
-        changeFillColor(this);
-
-        infowindow.open(map, this);
-        
-        var actualMarker = this;
-        infowindow.addListener('closeclick', function(){
-                changeFillColor(actualMarker);
-            });
+        createInfoWindow(this, myInfoWindow, content);
         
         console.log(this.icon);
     });
 
+}
+
+function createInfoWindow(marker, infowindow, content){
+    if (infowindow.marker != marker) {
+          infowindow.marker = marker;
+          infowindow.setContent(content);
+          
+          changeFillColor(marker);
+          infowindow.open(map, marker);
+          
+          var actualMarker = this;
+          // Make sure the marker property is cleared if the infowindow is closed.
+          infowindow.addListener('closeclick',function(){
+            changeFillColor(actualMarker);
+            infowindow.setMarker = null;
+          });
+        }
+    
+    //changeFillColor(this);
+    //
+    //infowindow.open(map, this);
+    //
+    //var actualMarker = this;
+    //infowindow.addListener('closeclick', function(){
+    //        changeFillColor(actualMarker);
+    //    });
 }
 
 function changeFillColor(marker){
@@ -94,6 +112,8 @@ function initMap() {
 
     map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
+    myInfoWindow = new google.maps.InfoWindow();
+    
     addAllMarkers(placesOfInterest);    
     
     
