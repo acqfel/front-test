@@ -39,22 +39,32 @@ function addMarker(place) {
         });
     
     marker.addListener('click', function() {
-        this.setMap(null);
-        this.icon.fillColor = '#FFFFFF';
-        this.setMap(map);
+        changeFillColor(this);
 
         infowindow.open(map, this);
         
         var actualMarker = this;
         infowindow.addListener('closeclick', function(){
-                actualMarker.setMap(null);
-                actualMarker.icon.fillColor = '#F7B217';
-                actualMarker.setMap(map);
+                changeFillColor(actualMarker);
             });
         
         console.log(this.icon);
     });
 
+}
+
+function changeFillColor(marker){
+    marker.setMap(null);
+    var color = marker.icon.fillColor;
+    
+    if(color === '#FFFFFF') {
+        color = '#F7B217';
+    }
+    else if (color === '#F7B217'){
+        color = '#FFFFFF';
+    }
+    marker.icon.fillColor = color;
+    marker.setMap(map);
 }
 
 // add all markers
