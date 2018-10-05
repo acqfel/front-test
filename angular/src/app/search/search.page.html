@@ -16,6 +16,22 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding class="max-height">
   <p>Showing <b>{{results.length}}</b> Results for: <b>{{searchInput}}</b></p><br />
+</ion-content>
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" offset="3">
+        <ion-list *ngIf="filterArray">
+          <ion-item lines="full" *ngFor="let legend of filterArray" >
+            <ion-label>
+              {{legend}}
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
