@@ -35,38 +35,53 @@ cada página tem sua URL e parece carregar rápido em 3G.
 ## Angular Questão 4:
 
 ### a) Para que serve o método ngOnInit, quais são os outros métodos do Angular lifecycle hooks e para que servem?
-R:
+R: o ngOnInit serve para executar algum código no momento da inicialização do componente.
+Outros métodos: ngOnChanges(), ngDoCheck(), ngAfterContentInit(), ngAfterContentChecked(),
+ngAfterViewInit(), ngAfterViewChecked(), ngOnDestroy().
 
-### b) Neste projeto, estamos usando os componentes gráficos da versão 4 da biblioteca gráfica do Ionic. Nesta versão, os componentes são Web Components. Explique o que são Web Components e explique quais são as vantagens deles.
-R: 
+### b) Neste projeto, estamos usando os componentes gráficos da versão 4 da biblioteca gráfica do Ionic.
+Nesta versão, os componentes são Web Components. Explique o que são Web Components e explique quais
+são as vantagens deles.
+R: São tags html encapsuladas, reutilizáveis e customizáveis que funcionam nos
+browsers modernos, também podem ser utilizadas com qualquer framework em Javascript.
 
 ### c) Para que serve a tag ngFor do angular?
-R:
+R: Para dados contidos em um array, utiliza-se o ngFor para acessar cada item dele e por exemplo
+exibí-lo no template.
 
 
 ### d) O que o codigo abaixo representa no arquivo list.page.ts?
 `legends: Array<string> = []`
-R
+R: legends é definida como uma variável do tipo array em que cada elemento é do tipo string.
 
 ### e) Como funciona a api Events do Ionic? Para que serve?
-R: 
+R: É um sistema publish-subscribe em que um componente publica um evento e o outro subscreve para
+recebê-lo. Ele serve para transmitir dados de um componente para o outro após ocorrer um evento.
 
 ### f) O que é flexbox? Para que servem as tags ion-grid, ion-row, ion-col? Quais as vantagens em utilizálas?
-R: 
+R: É um módulo do CSS para configurar o layout e a disposição dos itens em uma interface, com capacidade de
+alinhamento também.
 
 ## Angular Questão 6:
 
 ### a) Quais foram os problemas que você identificou?
-R:
+R: No arquivo home.page.ts, o import { LoadingControlle } está incorreto;
+a linha 29 deve ser this.dismissLoading() e não dismissLoading();
+Há uma requisição de 500 fotos, da maneira que foi codificada deixa o site lento no carregamento.
 
-### b) Ordene os problemas por ordem de criticidade, ou seja, liste todos os problemas encontrados na ordem de quais deveriam ser corrigidos primeiro em um cenário onde devessemos priorizar as correções.
-R:
+### b) Ordene os problemas por ordem de criticidade, ou seja, liste todos os problemas encontrados
+na ordem de quais deveriam ser corrigidos primeiro em um cenário onde devessemos priorizar as correções.
+R: 1) import da linha 2; 2) dismissLoading(); da linha 29 3) requisição de 500 fotos.
 
-### c) Justifique a ordem proposta no item anterior em termos de impacto para os usuários e dificuldade para corrigir o problema.
-R: 
+### c) Justifique a ordem proposta no item anterior em termos de impacto para os usuários e dificuldade
+para corrigir o problema.
+R: O do import e da linha 29 devem ser resolvidos primeiro pois sem isso nada será exibido.
+A próxima correção é inserir paginação para que as imagens sejam exibidas por partes,
+em grupos de 20, por exemplo.
 
 ### d) Para que servem os comandos async e await, encontrados na função presentLoading do arquivo home.page.ts?
-R:
+R: async presentLoading() -> indica que a função será assíncrona;
+this.loading = await this... - > this.loading será atribuído após o término da requisição assíncrona.
 
 ### f) Quais as vantagens de utilizar async/await em códigos javascript/typescript?
 R:
