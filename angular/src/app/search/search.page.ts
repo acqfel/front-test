@@ -8,23 +8,30 @@ import { legends } from '../names/nameslist';
 })
 export class SearchPage {
   searchInput : string;
-  results = [];
+  results: Array<string> = [];
   
   copyLegends: Array<string> = legends;
-  filterArray: Array<string>;
 
   ngOnInit() {
   }
 
-  onSearch() {
+  onSearch(event: any) {
+    
+    this.searchInput = event.target.value;
+    
+    if (this.searchInput.length === 0){
+      this.results = [];
+    }
+    
+    if (this.searchInput && this.searchInput.trim() != '') {
+      this.results = this.copyLegends.filter( (elem) => this.checkValue(elem));  
+    }
+    
     console.log(`Search: ${this.searchInput}`);
-    this.filterArray = this.copyLegends.filter( (elem) => this.checkValue(elem));
   }
   
   checkValue(value) {
-    
     let regex = new RegExp(this.searchInput, 'i');
-    console.log(value.length);
     return regex.test(value);
   }
 }

@@ -24,8 +24,8 @@
   <ion-grid>
     <ion-row>
       <ion-col size="6" offset="3">
-        <ion-list *ngIf="filterArray">
-          <ion-item lines="full" *ngFor="let legend of filterArray" >
+        <ion-list *ngIf="results">
+          <ion-item lines="full" *ngFor="let legend of results" >
             <ion-label>
               {{legend}}
             </ion-label>
