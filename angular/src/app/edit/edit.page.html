@@ -14,6 +14,12 @@
           <ion-list-header>
             <ion-label>List of Names</ion-label>
           </ion-list-header>
+          <ion-item lines="full" *ngFor="let legend of legends; index as i">
+            <ion-label *ngIf="!editMode[i]">{{legend}}</ion-label>
+            <ion-input [(ngModel)]="legends[i]" *ngIf="editMode[i]"></ion-input>
+            <button ion-button (click)="save(legend,i)" *ngIf="editMode[i]">Save</button>
+            <button ion-button (click)="edit(i)" *ngIf="!editMode[i]">Edit</button>
+          </ion-item>
         </ion-list>
       </ion-col>
     </ion-row>
